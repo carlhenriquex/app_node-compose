@@ -4,25 +4,27 @@ const mysql = require('mysql2');
 const app = express();
 
 app.use(express.json());
-
 app.use(express.static('public'));
 
-// Conexão com o banco de dados
-const db = mysql.createConnection({
+// Configuração do banco
+const db = mysql.createPool({
     host: 'db',
     user: 'root',
     password: '123456',
-    database: 'sistema'
+    database: 'sistema',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-// Verificando conexão
-db.connect((err) => {
+db.getConnection((err, connection) => {
     if (err) {
         console.log('Erro ao conectar:', err);
         return;
     }
 
     console.log('Conectado ao MySQL!');
+    connection.release();
 });
 
 // Rota de login
@@ -35,6 +37,7 @@ app.post('/login', (req, res) => {
     db.query(sql, [nome, senha], (err, resultado) => {
 
         if (err) {
+            console.log('Erro na consulta:', err);
             return res.status(500).json({
                 mensagem: 'Erro no banco de dados'
             });
@@ -52,7 +55,6 @@ app.post('/login', (req, res) => {
     });
 });
 
-// Iniciando servidor
 app.listen(3000, '0.0.0.0', () => {
     console.log('Backend rodando na porta 3000');
 });
