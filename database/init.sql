@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS sistema;
+
+USE sistema;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+INSERT INTO usuarios (nome, senha)
+VALUES ('carl', '123456');
