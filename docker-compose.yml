@@ -1,0 +1,52 @@
+
+# Defina os serviços que compõem a aplicação.
+# A aplicação deverá possuir dois serviços:
+# - Um serviço responsável pelo banco de dados MySQL.
+# - Um serviço responsável pelo backend Node.js.
+
+
+  # SERVIÇO DO BANCO DE DADOS
+  # Escolha uma imagem oficial do MySQL.
+  # Defina um nome para o container.
+  # Configure as variáveis de ambiente necessárias:
+  # - Senha do usuário root.
+  # - Nome do banco de dados.
+  
+  # Configure a publicação da porta do MySQL.
+  # Considere a necessidade de acesso externo pelo HeidiSQL.
+
+
+  # Configure os volumes do banco de dados.
+  # Um volume deverá garantir a persistência dos dados.
+  # Outro deverá disponibilizar o script SQL de inicialização.
+  # Pesquise o diretório utilizado pela imagem oficial do MySQL
+  # para executar scripts SQL durante a inicialização.
+
+
+  # Configure um healthcheck para verificar a disponibilidade do MySQL.
+  # Utilize o comando mysqladmin ping.
+  # Defina:
+  # - Intervalo entre verificações.
+  # - Tempo máximo de execução.
+  # - Quantidade de tentativas permitidas.
+
+
+  # SERVIÇO DO BACKEND
+  # Configure a construção da imagem utilizando o Dockerfile.
+  # Informe o diretório onde está localizado o Dockerfile.
+  # Defina um nome para o container.
+
+
+  # Configure o mapeamento da porta do backend.
+  # Considere a porta utilizada pela aplicação Node.js
+  # e a porta que será acessada pelo navegador.
+
+
+  # Configure a dependência entre o backend e o banco de dados.
+  # O backend deverá aguardar o banco estar saudável antes de iniciar.
+  # Pesquise a propriedade depends_on e a condição service_healthy.
+
+
+# VOLUMES
+# Declare o volume nomeado responsável por armazenar
+# persistentemente os dados do MySQL.
